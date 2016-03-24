@@ -27,6 +27,6 @@ public class FreundeSystem extends Plugin {
         pluginManager.registerCommand(this, new FriendCommand());
         pluginManager.registerCommand(this, new MSGCommand());
         pluginManager.registerCommand(this, new RCommand());
-        new MySQL("localhost", "LogMC", "x~n@fd5j", "LogMC");
+        new MySQL("localhost", "LogMC", "PasswordGoesHere", "LogMC");
     }
 }
