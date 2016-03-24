@@ -1,0 +1,6 @@
+name: FreundeSystem
+version: 0.1
+author: xDeathCubex
+description: FreundeSystem
+
+main: com.xdeathcubex.main.FreundeSystem
