@@ -1,6 +1,6 @@
 package com.xdeathcubex.commands;
 
-import com.xdeathcubex.main.FreundeSystem;
+import com.xdeathcubex.FreundeSystem;
 import com.xdeathcubex.mysql.MySQL;
 import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.ProxyServer;
@@ -26,8 +26,8 @@ public class MSGCommand extends Command {
             } else {
                 ProxiedPlayer p1 = ProxyServer.getInstance().getPlayer(args[0]);
                 if(p1 != null){
-                    if(MySQL.is("Friends", p1.getUniqueId().toString(), p.getUniqueId().toString())){
-                        if(MySQL.getProperties(p1.getUniqueId().toString(), "msgs")) {
+                    if(MySQL.is("Friends", p1.getUniqueId().toString().replaceAll("-",""), p.getUniqueId().toString().replaceAll("-",""))){
+                        if(MySQL.getProperties(p1.getUniqueId().toString().replaceAll("-",""), "msgs")) {
                             String nachricht = "";
                             for (int i = 1; i < args.length; i++) {
                                 nachricht += args[i] + " §e";

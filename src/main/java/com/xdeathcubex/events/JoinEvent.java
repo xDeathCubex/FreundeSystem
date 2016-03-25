@@ -1,6 +1,6 @@
 package com.xdeathcubex.events;
 
-import com.xdeathcubex.main.FreundeSystem;
+import com.xdeathcubex.FreundeSystem;
 import com.xdeathcubex.mysql.MySQL;
 import com.xdeathcubex.utils.UUIDFetcher;
 import net.md_5.bungee.api.ProxyServer;
@@ -17,18 +17,14 @@ public class JoinEvent implements Listener {
     @EventHandler
     public void onJoin(PostLoginEvent e) {
         ProxiedPlayer p = e.getPlayer();
-        String uuid = p.getUniqueId().toString();
-
-
 
         String name = p.getName();
         if(name.length() > 14){
             name = name.substring(0,14);
         }
-        String uuid1 = String.valueOf(UUIDFetcher.getUUID(p.getName()));
-        uuid1 = uuid1.replaceAll("-", "");
-        if(MySQL.getRank(uuid1) != null){
-            String group = MySQL.getRank(uuid1);
+        String uuid = p.getUniqueId().toString().replaceAll("-","");
+        if(MySQL.getRank(uuid) != null){
+            String group = MySQL.getRank(uuid);
             if(group.equalsIgnoreCase("admin")){
                 p.setDisplayName("§4" + name);
             }
@@ -59,9 +55,9 @@ public class JoinEvent implements Listener {
         String[] friends = MySQL.get("Friends", uuid).split(" ");
         for(String freunde : friends){
             if(!freunde.equals("")){
-                if(ProxyServer.getInstance().getPlayer(UUID.fromString(freunde)) != null) {
-                    ProxiedPlayer p1 = ProxyServer.getInstance().getPlayer(UUID.fromString(freunde));
-                    if(MySQL.getProperties(p1.getUniqueId().toString(), "notifies")) {
+                if(ProxyServer.getInstance().getPlayer(UUIDFetcher.getName(freunde)) != null) {
+                    ProxiedPlayer p1 = ProxyServer.getInstance().getPlayer(UUIDFetcher.getName(freunde));
+                    if(MySQL.getProperties(p1.getUniqueId().toString().replaceAll("-",""), "notifies")) {
                         p1.sendMessage(new TextComponent(FreundeSystem.prefix + p.getDisplayName() + " §7ist nun §aonline"));
                     }
                 }

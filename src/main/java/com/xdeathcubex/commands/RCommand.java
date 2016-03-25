@@ -1,6 +1,6 @@
 package com.xdeathcubex.commands;
 
-import com.xdeathcubex.main.FreundeSystem;
+import com.xdeathcubex.FreundeSystem;
 import com.xdeathcubex.mysql.MySQL;
 import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.chat.TextComponent;
@@ -21,8 +21,8 @@ public class RCommand extends Command {
         if (args.length < 1) {
             p.sendMessage(new TextComponent(FreundeSystem.prefix + "§cVerwendung: /r <Nachricht>"));
         } else {
-            if (MySQL.is("Friends", p.getUniqueId().toString(), p1.getUniqueId().toString())) {
-                if(MySQL.getProperties(p1.getUniqueId().toString(), "msgs")) {
+            if (MySQL.is("Friends", p.getUniqueId().toString(), p1.getUniqueId().toString().replaceAll("-",""))) {
+                if(MySQL.getProperties(p1.getUniqueId().toString().replaceAll("-",""), "msgs")) {
                     String nachricht = "";
                     for (String arg : args) {
                         nachricht += arg + " §e";
